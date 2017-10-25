@@ -1,4 +1,3 @@
-#!/usr/bin/env python2.7
 """
 This module provides convenient wrappers for controlling Kwikset Kevo locks
 """
@@ -9,9 +8,11 @@ import json
 import requests
 import time
 
+
 class KevoError(Exception):
     """Base exception for all Kevo errors"""
     pass
+
 
 class Kevo(object):
     """
@@ -63,8 +64,6 @@ class Kevo(object):
             "authenticity_token" : token
         }
         result = session.post(Kevo.LOGIN_URL, login_payload)
-#        print result.status_code
-#        print result.text
         return result
 
     @staticmethod
@@ -304,29 +303,3 @@ class KevoLockSession(object):
 
     def __exit__(self, *exc):
         self.lock.EndSession()
-
-
-if __name__ == "__main__":
-    from getpass import getpass
-
-    user = raw_input("Username: ")
-    passwd = getpass("Password: ")
-
-    # Scrape the mykevo.com site to find the locks
-    for kevolock in Kevo.GetLocks(user, passwd):
-        print repr(kevolock)
-
-    # Instantiate locks from IDs
-    # Get the lock IDs by logging into mykevo.com, click Details for the lock, click Settings, the lock ID is on the right
-#    front_door_id = "cca7cd1d-c1d5-43ce-a087-c73b974b3529"
-#    back_door_id = "c60130cd-8139-4688-8ba3-199276a65ad6"
-#    for lock_id in [front_door_id, back_door_id]:
-#        kevolock = KevoLock.FromLockID(lock_id, user, passwd)
-#        print str(kevolock)
-
-    # Do multiple operations on a lock using a single session
-#    kevolock = KevoLock.FromLockID(garage_door_id, user, passwd)
-#    with KevoLockSession(kevolock):
-#        kevolock.Unlock()
-#        kevolock.Lock()
-
