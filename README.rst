@@ -13,6 +13,8 @@ credentials to use this module.
 
 This module is published to `pypi`_ so you can install it simply via ``pip install pykevoplus``
 
+It is supported in Python 2.7 & 3.x.
+
 Usage
 =====
 
@@ -26,7 +28,7 @@ the website.
     from pykevoplus import Kevo
     locks = Kevo.GetLocks("username@email.com", "password123")
     for lock in locks:
-        print repr(lock)
+        print(repr(lock))
 
 Output::
 
@@ -79,7 +81,6 @@ Known Issues
 
 * Error handling is extremely basic and needs much more work. Communication errors as well as lock bolt errors need to be addressed
 * No unit tests yet
-* Currently only python 2.7 support
 
 
 
