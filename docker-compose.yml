@@ -1,0 +1,13 @@
+version: '2'
+services:
+    wristlock:
+        build: .
+        ports:
+            - "5100:80"
+        volumes:
+            - .:/wristlock
+        environment:
+            - PORT=80
+            - PYTHONUNBUFFERED=1
+            - ENV_NAME=local
+        command: bash  -c "bash start_local.sh"
