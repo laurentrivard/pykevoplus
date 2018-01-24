@@ -12,6 +12,5 @@ class LockLock(BaseCommandRun):
         self._lock()
 
     def _lock(self):
-        print('--------------------------doing lock')
         self.session.get(self.lock_command_url)
         self.wait_for_state(state=LockState.LOCKED)

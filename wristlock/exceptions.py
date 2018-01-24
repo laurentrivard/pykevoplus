@@ -7,11 +7,16 @@ class KevoError(Exception):
         self.message = message
 
 
-class NotFoundError(Exception):
+class NotFoundError(KevoError):
     status_code = 404
     message = "Lock not found"
 
 
-class TimeoutError(Exception):
+class TimeoutError(KevoError):
     status_code = 400
     message = "Timeout error"
+
+
+class UnauthorizedError(KevoError):
+    status_code = 401
+    message = "Unauthorized"

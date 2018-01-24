@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 from requests import Session
 
 from wristlock import KEVO_START_URL, KEVO_LOGIN_URL
-from wristlock.exceptions import NotFoundError
+from wristlock.exceptions import NotFoundError, UnauthorizedError
 
 
 class BaseRun(object):
@@ -20,6 +20,10 @@ class BaseRun(object):
             "authenticity_token": token
         }
         result = self.session.post(KEVO_LOGIN_URL, login_payload)
+        try:
+            result.raise_for_status()
+        except:
+            raise UnauthorizedError()
         self.result_page = result.text
 
     def _get_token(self) -> str:
